@@ -1,5 +1,5 @@
 # Juki570
-A couple of bits of Perl that will parse an Eagle .BRD file and produce a Juki .P5A file for the 570 series SMD
+A couple of bits of Perl that will parse an Eagle .BRD file and produce a Juki .P5A file for the 570 series SMD placement machines.
 
 The Juki .P5A format is a binary format used in the 570L and KP620E series of pick and place machines
 
