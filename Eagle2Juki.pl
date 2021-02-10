@@ -18,7 +18,7 @@ use JukiWriter17;
 my($fileName) = shift @ARGV;
 
 if(! $fileName =~ /\w+.BRD$/i){
-  die "Use:  reader2.pl <eagle .BRD file>\n";
+  die "Use:  Eagle2Juki.pl <eagle .BRD file>\n";
 }
 
 my($title) =  $fileName =~ /(\w+).BRD$/i;

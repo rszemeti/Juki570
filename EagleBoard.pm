@@ -39,7 +39,7 @@ sub getTitle{
 }
 
 sub process{
-  my( $self)=@_;
+  my($self)=@_;
   if(! $self->{_fileName} =~ /\w+.BRD$/i){
     die "Use:  reader.pl <eagle .BRD file>\n";
   }
@@ -256,6 +256,7 @@ foreach(@feederOrder){
       'pattern' => $c->{package},
       'usedBy' =>[$c->{name}],
       'packageData' =>$c->{packageData},
+      'dimensions' => $self->getDimensions($c->{package}),
     };
     if(exists($c->{attribute})){
       # check for MPN(can be hashref, can be array ref)
@@ -299,4 +300,84 @@ sub getFeederIndex{
   my($self)=shift;
   return $self->{_feeders};
 }
+
+sub getDimensions{
+  my($self)=shift;
+  my($pattern)=shift;
+  if($pattern =~/0402/){
+    return {
+      width => 1.0,
+      depth => 0.5,
+      height => 0.3,
+    };
+  }elsif($pattern =~/0603/){
+    return {
+      width => 1.5,
+      depth => 1.0,
+      height => 0.5,
+    };
+  }elsif($pattern =~/0805/){
+    return {
+      width => 2.0,
+      depth => 1.3,
+      height => 0.6,
+    };
+  }elsif($pattern =~/1008/){
+    return {
+      width => 2.5,
+      depth => 2.0,
+      height => 0.6,
+    };
+  }elsif($pattern =~/1206/){
+    return {
+      width => 3.0,
+      depth => 1.5,
+      height => 0.8,
+    };
+  }elsif($pattern =~/1210/){
+    return {
+      width => 3.2,
+      depth => 2.5,
+      height => 0.8,
+    };
+  }elsif($pattern =~/1806/){
+    return {
+      width => 4.5,
+      depth => 1.6,
+      height => 0.8,
+    };
+  }elsif($pattern =~/1812/){
+    return {
+      width => 4.6,
+      depth => 3.0,
+      height => 0.8,
+    };
+  }elsif($pattern =~/1825/){
+    return {
+      width => 4.5,
+      depth => 6.4,
+      height => 0.8,
+    };
+  }elsif($pattern =~/2010/){
+    return {
+      width => 5.0,
+      depth => 2.5,
+      height => 0.8,
+    };
+  }elsif($pattern =~/2512/){
+    return {
+      width => 6.3,
+      depth => 3.2,
+      height => 0.8,
+    };
+  }else{
+    return {
+      width => 2.0,
+      depth => 1.3,
+      height => 0.6,
+    };
+  }
+
+}
+
 1;

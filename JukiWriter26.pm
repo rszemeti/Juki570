@@ -62,7 +62,18 @@ sub packData{
     
     foreach(@{$self->{_placements}}){
       my($element)=$_;
-      my($data)=pack("a5 x2 i< i< S< C C C C C",$element->{name},$element->{x}*10000,$element->{y}*10000,$element->{rotation}*50,$self->{_feederIndex}->{$element->{key}},0x00,0x00, 0x3B, 0x00);
+      my($data)=pack("a5 x C i< i< S< C C C C C",
+          $element->{name},
+          0x02,
+          $element->{x}*10000,
+          $element->{y}*10000,
+          $element->{rotation}*50,
+          $self->{_feederIndex}->{$element->{key}},
+          0x00,
+          0x00, 
+          0x3B, 
+          0x00
+      );
       push(@{$placements},$data);
     }
     

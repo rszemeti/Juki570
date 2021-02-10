@@ -117,17 +117,16 @@ sub packData{
     #     3C F6 FF FF 00 00 00 00 00 00 00 00 09 93 08 00 DF 01 00 00 00 07 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
     
 
-    
-    
     foreach(@{$self->{_feeders}}){
       my($feeder)=$_;
+      
       my($data)=pack("a20 x1 a20 x1 S<3 C i< i< i< i< x8 S< S< S< x3 S< x15",
-        $feeder->{name},
+        $feeder->{name}." ".$feeder->{pattern},
         $feeder->{pattern},
         0xFF02,0x00,$feeder->{count},0xE2,
-        0x00004E20, #width
-        0x00002EE0, #depth
-        0x00001388, #height
+        $feeder->{dimensions}->{width} * 10000, #width
+        $feeder->{dimensions}->{depth} * 10000, #depth
+        $feeder->{dimensions}->{height} * 10000, #height
         0xFFFFF63C, # fixed
         0x9309,
         0x0008,
@@ -141,6 +140,8 @@ sub packData{
     $self->{_feederData} = $components;
 
 }
+
+
 
 sub writeToFile{
   my($self)=shift;
